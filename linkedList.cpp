@@ -5,12 +5,12 @@ class linkedList {
     private:
     struct node {
         int data;
-        node * next = NULL;
+        node * next;
     };
     node * root = NULL;
     public:
 
-    node * returnRoot(){
+    node * returnHead(){
         return root;
     }
     node * createNode(int data) {
@@ -20,7 +20,7 @@ class linkedList {
         return newNode;
     }
 
-    void addNode(int data) {
+    void push(int data) {
         if(root == NULL) {
             root = createNode(data);
         }
@@ -54,7 +54,7 @@ class linkedList {
             ptr = ptr->next;
         }
 
-        /*  here the loop istrying to access a memory that is not assigned 
+        /*  here the loop is trying to access a memory that is not assigned 
             to it, so the compiler just terminate the program at that pint
         */
 
@@ -419,7 +419,7 @@ class linkedList {
         root = ptr;
     }
 
-    void intesectionOfList(node * r1, node * r2) {
+    void intersectionOfList(node * r1, node * r2) {
         while (r1 != NULL && r2 != NULL) {
             if(r1->data == r2->data) {
                 cout<<r1->data<<" -> ";
@@ -621,44 +621,227 @@ class linkedList {
 class CircularLinkedList {
     struct node {
         int data;
-        node * next = NULL;
-        node * prev = NULL;
+        node * next;
     };
-
+    node * head = NULL;
+    
     public :
     
+    node * returnHead() {
+        return head;
+    }
+
+    node * createNode(int data){
+    node * temp = new node;
+    temp->data = data;
+    temp->next = NULL;
+    return temp;
+   }
+
+   void push(int data) {
+    if(head == NULL) {
+        head = createNode(data);
+        head->next = head;
+    }
+    else {
+        node * ptr = head;
+        node * temp = createNode(data);
+        while(ptr->next != head) {
+            ptr = ptr->next;
+        }   
+        ptr->next = temp;
+        temp->next = head;
+    }
+   }
+   void display(node * headptr) {
+        node * ptr = headptr;
+        do{
+            cout<<ptr->data;
+            if(ptr->next != headptr) {
+                cout<<" -> ";
+            }
+            ptr = ptr->next;
+        } while(ptr != headptr);
+   }
+
+   void splitInHalf() {
+    node * ptr = head;
+    node * h1, * h2;
+    
+    node * fast, * slow;
+    fast = head;
+    slow = head;
+    while(fast ->next->next != head && fast ->next != head) {
+        fast = fast->next->next;
+        slow = slow->next;
+    }
+
+    if(fast->next->next == head) {
+        fast = fast->next;
+    }
+
+    h1 = head;
+    if(head->next != head)
+        h2 = slow->next;
+    
+    fast->next = slow->next;
+    slow->next = head;
+
+    display(h1);
+    cout<<endl;
+    display(h2);
+
+   }
+
+   void sortedInsert(int data) {
+    node * ptr = head, * prev = NULL;
+    node * temp = createNode(data);
+    if(ptr->data > data){
+        prev = head;
+        while(prev->next != head){
+            prev = prev->next;
+        }
+        prev->next = temp;
+        temp->next = ptr;
+        head = temp;
+    }
+    else{
+        while(ptr->next != head){
+            if(ptr->data > data){
+                break;
+            }
+            prev = ptr;
+            ptr = ptr->next;
+        }
+        if(ptr->next == head) {
+        ptr->next = temp;
+        temp->next = head;
+        }
+        else{
+            prev->next = temp;
+            temp->next = ptr;
+        }
+    }   
+   }
+
+   bool isCircular(node * head){
+    node * Sptr = head;
+    node * Fptr = head;
+    bool flag = false;
+    while(Sptr && Fptr){
+
+        if(Sptr == Fptr) {
+            return true;
+        }
+
+        Sptr = Sptr->next;
+        Fptr = Fptr->next->next;
+    }
+    return false;
+   }
+   
+   void deleteNodeByData(int data) {
+    node * ptr = head, * prev = NULL;
+    if(ptr->data == data) {
+        prev = head;
+        while(prev->next != head)
+            prev = prev->next;
+        
+        prev->next = ptr->next;
+        head = head->next;
+        delete ptr;
+        }
+    else{
+    while(ptr->next != head){
+        if(ptr->data == data)
+        break;
+        prev = ptr;
+        ptr = ptr->next;
+    }
+    
+        prev->next = ptr->next;
+        delete ptr;
+   }
+   }
+
+   void deleteNodeByAddress(node * dl){
+    node * ptr = head;
+    node * prev = NULL;
+    if(ptr == dl)
+    {
+        prev = head;
+        while(prev->next != head)
+            prev = prev->next;
+        
+        prev->next = ptr->next;
+        head = head->next;
+        delete ptr;
+    }
+    else{
+    while(ptr->next != head){
+        if(ptr == dl)
+        break;
+        prev = ptr;
+        ptr = ptr->next;
+    }
+    
+        prev->next = ptr->next;
+        delete ptr;
+   }
+   }
+
+   void JosephusCircle(int k) {
+    int temp = k-1;
+    node * ptr = head;
+    
+    while(ptr->next != ptr) {
+        if(!temp){
+            node * tnode = ptr->next;
+            deleteNodeByAddress(ptr);
+            ptr = tnode;
+            temp = k-1;
+        }
+        temp--;
+        ptr = ptr->next;
+    }
+    cout<<ptr->data;
+   }
 };
 
-int main()
-{
-    linkedList l1,l2;
-    l1.addNode(7);
-    l1.addNode(3);
-    l1.addNode(6);
-    l1.addNode(5);
-    l1.addNode(1);
-    l1.addNode(2);
-    l1.addNode(4);
+int main() {
+    CircularLinkedList l1;
+    // l2;
+    l1.push(0);
+    l1.push(1);
+    l1.push(2);
+    l1.push(3);
+    l1.push(4);
+    // l1.push(5);
+    // l1.push(6);
+    // l1.push(7);
     
-
-    l2.addNode(40);
-    l2.addNode(20);
-    l2.addNode(60);
-    l2.addNode(10);
-    l2.addNode(50);
-    l2.addNode(30);
+   
+    // l2.push(40);
+    // l2.push(20);
+    // l2.push(60);
+    // l2.push(10);
+    // l2.push(50);
+    // l2.push(30);
     // ll.returnRoot()->next->next->next = ll.returnRoot();
-    // l1.display(l1.returnRoot());
-    // cout<<endl;
-    l2.display(l2.returnRoot());
-
-    cout<<endl;
     
-    l2.reverseLinkedList();
+    l1.display(l1.returnHead());
+    cout<<endl;
+
+    // l2.display(l2.returnHead());
+
+    cout<<endl;
+    l1.JosephusCircle(3);
+    // l1.reverseLinkedList();
+
+    cout<<endl;
+    // l1.display(l1.returnHead());
 
     // cout<<endl;
-    // l2.display(l1.returnRoot());
-    cout<<endl;
-    l2.display(l2.returnRoot());
+    // l2.display(l2.returnHead());
     return 0;
 }
