@@ -653,15 +653,15 @@ class CircularLinkedList {
         temp->next = head;
     }
    }
-   void display(node * headptr) {
-        node * ptr = headptr;
+   void display(node * headPtr) {
+        node * ptr = headPtr;
         do{
             cout<<ptr->data;
-            if(ptr->next != headptr) {
+            if(ptr->next != headPtr) {
                 cout<<" -> ";
             }
             ptr = ptr->next;
-        } while(ptr != headptr);
+        } while(ptr != headPtr);
    }
 
    void splitInHalf() {
@@ -808,8 +808,48 @@ class CircularLinkedList {
    }
 };
 
+class doublyLinkedList{
+    struct node {
+        int data;
+        node * next = NULL;
+        node * prev = NULL;
+    };
+    node * head = NULL;
+
+    public:
+
+    node * createNode(int data){
+        node * temp = new node;
+        temp->data = data;
+        return temp;
+    }
+
+    void push(int data) {
+        if(head == NULL) {
+            head = createNode(data);
+        }
+        else {
+            node * ptr = head;
+            node * newNode = createNode(data);
+            while(ptr->next != NULL)
+            ptr = ptr->next;
+
+            ptr->next = newNode;
+            newNode->prev = ptr;
+        }
+    }
+
+    void display(){
+        node * ptr = head;
+        while(ptr != NULL){
+            cout<<ptr->data<<" -> ";
+            ptr = ptr->next;
+        }
+    }
+
+};
 int main() {
-    CircularLinkedList l1;
+    doublyLinkedList l1;
     // l2;
     l1.push(0);
     l1.push(1);
@@ -829,13 +869,11 @@ int main() {
     // l2.push(30);
     // ll.returnRoot()->next->next->next = ll.returnRoot();
     
-    l1.display(l1.returnHead());
+    l1.display();
     cout<<endl;
 
     // l2.display(l2.returnHead());
 
-    cout<<endl;
-    l1.JosephusCircle(3);
     // l1.reverseLinkedList();
 
     cout<<endl;
