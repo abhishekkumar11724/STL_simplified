@@ -82,44 +82,70 @@ class stack_linkedList
 {
     struct node
     {
-        int data;
-        node *next = NULL;
+        char data;
+        node *next = nullptr;
     };
     node *top = NULL;
 
 public:
-    node *createNode(int data)
+    node *createNode(char data)
     {
         node *temp = new node;
         temp->data = data;
         return temp;
     }
-
-    void push(int data)
+    void push(char data)
     {
-        if (top == NULL)
-        {
+        if (top == NULL) {
             top = createNode(data);
         }
-        else
-        {
+        else {
             node *temp = createNode(data);
             temp->next = top;
             top = temp;
         }
     }
-
-    void display()
-    {
+    void display() {
         node *ptr = top;
-        while (ptr != NULL)
-        {
+        while (ptr != NULL) {
             cout << ptr->data;
             if (ptr->next != NULL)
                 cout << " -> ";
             ptr = ptr->next;
         }
     }
+    bool pop() {
+        node * temp = top;
+        if(top == nullptr) 
+            return false;
+        top = top->next;
+        delete temp;
+        return true;
+    }
+    char stackTop() {
+        return top->data;
+    }
+    bool isEmpty() {
+        if(top == NULL)
+            return true;
+        return false;
+    }
+    bool isFull() {
+    node * t = new node;
+    return t ? true : false;
+    }
+    char peek(char pos) {
+        // fuction to get the value at any position in stack
+        node * ptr = top;
+        while( pos != 0 || ptr->next) {
+            ptr = ptr->next;
+            pos--;
+        }
+        if(ptr == NULL)
+            return -1;
+        return ptr->data;
+    }
+
 };
 
 class specialStack
@@ -250,7 +276,6 @@ template<typename T>int findMiddle(T &st)
 // {
 //     stack<int> st;
 
-
 //     st.push(1);
 //     st.push(2);
 //     st.push(3);
@@ -259,20 +284,77 @@ template<typename T>int findMiddle(T &st)
 //     // You can initialise your stack here.
 //     printStack(st);
 // }
+
+void parenthesisMatch(string s){
+    /*  41  (, 42  ), 91  [, 93  ], 123 {, 125 }  */
+
+    stack<char> st;
+    int i = 0;
+    while(s[i]) {
+        // char ch = s[i];
+        if(s[i] == '(' || s[i] == '['|| s[i] == '{')
+            st.push(s[i]);
+        else if(s[i] == ')' || s[i] == ']'|| s[i] == '}')
+            st.pop();
+        i++;
+    }   
+    if(st.empty()) cout<<"parenthesis is matching !!!!";
+    else cout<<"parenthesis is not matching !!!";
+}
+void infixToPostfix_parenthesized(string s) {
+    stack_linkedList ch, op;
+   int i = 0;
+   while(s[i]) {
+    // cout<<s[i]<<endl;
+        if(s[i] == '(' || s[i] == '+' || s[i] == '-' || s[i] == '*' || s[i] == '/') 
+            op.push(s[i]);
+        else if(s[i] == ')') {
+            // cout<<"\t"<<op.top();
+            ch.push(op.stackTop());
+            op.pop();
+            op.pop();
+        }
+        else{
+            ch.push(s[i]);
+        }
+        i++;
+    }
+
+    vector<char> vec;
+    while(!ch.isEmpty()){
+        vec.push_back(ch.stackTop());
+        ch.pop();
+    }
+    reverse(vec.begin(), vec.end());
+    for(auto i = 0; i <vec.size(); i++) 
+        cout<<vec[i];
+};
+void infixToPostfix(string s) {
+    stack_linkedList st, op;
+    
+    int i = 0;
+    while(s[i]) {
+    
+    }
+}
 int main()
 {
-    stack<int> st;
+    // parenthesisMatch("(({}{}[[]]))");
+    // infixToPostfix_parenthesized("((a+b)-c)");
+    infixToPostfix("a+b*c-d/e");
+    // stack_linkedList st;
 
     // specialStack st;
-    st.push(1);
-    st.push(2);
-    st.push(3);
-    st.push(4);
-    st.push(5);
-    st.push(6);
-    st.push(7);
-    findMiddle(st);
-    
+    // st.push(1);
+    // st.push(2);
+    // st.push(3);
+    // st.push(4);
+    // st.push(5);
+    // st.push(6);
+    // st.push(7);
+    // findMiddle(st);
+
+    // st.display();    
     // cout<<st.getMin();
     return 0;
 }

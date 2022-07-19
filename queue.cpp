@@ -100,41 +100,63 @@ class queue_array_type2 {
 };
 
 class queue_array_type2_extended{
-    int * arr, front, rear, size = 10;
+    int  front = 0, rear = 0, size = 10, arr[10];
 
     public :
     void enqueue(int data) {
-        
+        if((rear+1) % size == front)  cout<<"Queue is full !!!"<<endl;
+        else {
+            rear = (rear + 1) % size;
+            arr[rear] = data;
+        }
     }
     int dequeue() {
-
+        int x = -1;
+        if((front + 1) % size == rear) cout<<"queue is empty"<<endl;
+        else {
+            x = arr[front];
+            front = (front + 1) % size;
+        }
     }
-    void 
+    void display() {
+        int i = front+1;
+        cout<<endl;
+        while(i !=( rear + 1) % size){
+            cout<<arr[i]<<" -> ";
+            i = (i+1)%size;
+        }
+    }
+     void array(){
+        cout<<endl;
+        for(int i =0; i< 10;i++)cout<<arr[i]<<" -> ";
+    }
 };
 
-int main(){
-    queue_array_type2 q;
-    q.enqueue(1);
-    q.enqueue(2);
-    q.enqueue(3);
-    q.enqueue(4);
-    q.enqueue(5);
-    q.enqueue(6);
-    q.enqueue(7);
-    q.enqueue(8);
-    q.enqueue(9);
-    q.enqueue(10);
-    q.enqueue(11);
-    q.enqueue(12);
-    q.enqueue(13);
+// int main()
+// {
+//     queue_array_type2_extended q;
+//     q.enqueue(1);
+//     q.enqueue(2);
+//     q.enqueue(3);
+//     q.enqueue(4);
+//     q.enqueue(5);
+//     q.enqueue(6);
+//     q.enqueue(7);
+//     q.enqueue(8);
+//     q.enqueue(9);
+//     q.enqueue(10);
+//     q.enqueue(11);
+//     q.enqueue(12);
+//     q.enqueue(13);
     
-    q.display();
-    q.array();
+//     q.display();
+//     q.array();
 
 //  q.dequeue();
 //  q.dequeue();
 
 //  q.display();
-    return 0;
-}
+//  q.array();
+//     return 0;
+// }
 
