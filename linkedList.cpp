@@ -13,23 +13,23 @@ class linkedList {
     node * returnHead(){
         return root;
     }
-    node * createNode(int data) {
-        node * newNode = new node;
-        newNode->data = data;
-        newNode->next = NULL;
-        return newNode;
+    node * createnode(int data) {
+        node * newnode = new node;
+        newnode->data = data;
+        newnode->next = NULL;
+        return newnode;
     }
 
     void push(int data) {
         if(root == NULL) {
-            root = createNode(data);
+            root = createnode(data);
         }
         else {
             node * ptr = root;
             while(ptr->next != NULL)
                 ptr = ptr->next;
-            node * newNode = createNode(data);
-            ptr->next = newNode;
+            node * newnode = createnode(data);
+            ptr->next = newnode;
         }
     }
 
@@ -86,7 +86,7 @@ class linkedList {
     //     return false; 
     // } 
 
-    bool deleteNodeByValue(int key) {
+    bool deletenodeByValue(int key) {
         node * ptr = root;
         node * tail = NULL;
         while(ptr != NULL) {
@@ -119,7 +119,7 @@ class linkedList {
         }
     }
 
-    bool deleteNodeByPosition(int pos) {
+    bool deletenodeByPosition(int pos) {
         node * ptr = root;
         if(pos == 0) {
             root = root->next;
@@ -154,7 +154,7 @@ class linkedList {
         return true;
     }
 
-    int nthNodeInLinkedList(int n) {
+    int nthnodeInLinkedList(int n) {
         node * ptr = root;
 
         while(ptr != NULL) {
@@ -168,7 +168,7 @@ class linkedList {
         return false;
     }
 
-    int nthNodeFromEnd(int n) {
+    int nthnodeFromEnd(int n) {
         node * ptr = root;
         int num=0;
         while (ptr!=NULL) {
@@ -189,25 +189,25 @@ class linkedList {
         return false;
     }
 
-    void middleNode() {
-        int totalNode = 0;
+    void middlenode() {
+        int totalnode = 0;
         node * ptr = root;
         while(ptr !=NULL) {
             ptr = ptr->next;
-            totalNode++;
+            totalnode++;
         }
         int nodeNum = 0;
         
-        if(totalNode %2 == 0){
-            nodeNum = totalNode/2;
+        if(totalnode %2 == 0){
+            nodeNum = totalnode/2;
         }
         else {
-            nodeNum = totalNode/2+1;
+            nodeNum = totalnode/2+1;
         }
         ptr = root;
         while(ptr != NULL) {
             if(nodeNum == 1) {
-                if(totalNode % 2 == 0) {
+                if(totalnode % 2 == 0) {
                     cout<<ptr->data<<" "<<ptr->next->data<<endl;
             
                 }
@@ -253,12 +253,14 @@ class linkedList {
         node * tail = NULL;
         tail = root;
         ptr=ptr->next;
-        while(ptr != NULL && ptr->next == NULL && tail == NULL) {
+        // here, we had used && instead of || because with && 
+        // the loop will stop if even one condition is false
+        // but with or 
+        while(ptr && ptr->next && tail) {
             
             if(tail == ptr) {
                 return true;
             }
-            
             tail=tail->next;
             ptr=ptr->next->next;
         }
@@ -449,7 +451,7 @@ class linkedList {
     //     y = temp;
     // }
 
-    // node * swapNode(node * ptr, node * tail, node * before_ptr, node * before_tail) {
+    // node * swapnode(node * ptr, node * tail, node * before_ptr, node * before_tail) {
     //     if(!before_tail){
     //         // tail->next = ptr->next;
     //         // ptr->next = tail;
@@ -532,7 +534,7 @@ class linkedList {
     //         if(j->data <= pivot->data) {
     //             if(i == NULL) i =  low;
                 
-    //             swapNode(j,i,b_j,b_i);
+    //             swapnode(j,i,b_j,b_i);
     //             b_i = i;
     //             i = i->next;
     //         }
@@ -541,7 +543,7 @@ class linkedList {
     //     }
     //     b_i = i;
     //     i = i->next;
-    //     swapNode(pivot, i, returnBeforeEnd( low, high), b_i);
+    //     swapnode(pivot, i, returnBeforeEnd( low, high), b_i);
     //     return i;
     // }
     // void quickSortOnList( node * low, node * high) {
@@ -613,6 +615,7 @@ class linkedList {
         next_ptr->next = ptr;
         root = next_ptr;
     }
+
 };
 
 /*#####################################################################################################
@@ -631,7 +634,7 @@ class CircularLinkedList {
         return head;
     }
 
-    node * createNode(int data){
+    node * createnode(int data){
     node * temp = new node;
     temp->data = data;
     temp->next = NULL;
@@ -640,12 +643,12 @@ class CircularLinkedList {
 
    void push(int data) {
     if(head == NULL) {
-        head = createNode(data);
+        head = createnode(data);
         head->next = head;
     }
     else {
         node * ptr = head;
-        node * temp = createNode(data);
+        node * temp = createnode(data);
         while(ptr->next != head) {
             ptr = ptr->next;
         }   
@@ -695,7 +698,7 @@ class CircularLinkedList {
 
    void sortedInsert(int data) {
     node * ptr = head, * prev = NULL;
-    node * temp = createNode(data);
+    node * temp = createnode(data);
     if(ptr->data > data){
         prev = head;
         while(prev->next != head){
@@ -740,7 +743,7 @@ class CircularLinkedList {
     return false;
    }
    
-   void deleteNodeByData(int data) {
+   void deletenodeByData(int data) {
     node * ptr = head, * prev = NULL;
     if(ptr->data == data) {
         prev = head;
@@ -764,7 +767,7 @@ class CircularLinkedList {
    }
    }
 
-   void deleteNodeByAddress(node * dl){
+   void deletenodeByAddress(node * dl){
     node * ptr = head;
     node * prev = NULL;
     if(ptr == dl)
@@ -797,7 +800,7 @@ class CircularLinkedList {
     while(ptr->next != ptr) {
         if(!temp){
             node * tnode = ptr->next;
-            deleteNodeByAddress(ptr);
+            deletenodeByAddress(ptr);
             ptr = tnode;
             temp = k-1;
         }
@@ -818,7 +821,7 @@ class doublyLinkedList{
 
     public:
 
-    node * createNode(int data){
+    node * createnode(int data){
         node * temp = new node;
         temp->data = data;
         return temp;
@@ -826,16 +829,16 @@ class doublyLinkedList{
 
     void push(int data) {
         if(head == NULL) {
-            head = createNode(data);
+            head = createnode(data);
         }
         else {
             node * ptr = head;
-            node * newNode = createNode(data);
+            node * newnode = createnode(data);
             while(ptr->next != NULL)
             ptr = ptr->next;
 
-            ptr->next = newNode;
-            newNode->prev = ptr;
+            ptr->next = newnode;
+            newnode->prev = ptr;
         }
     }
 
@@ -848,15 +851,17 @@ class doublyLinkedList{
     }
 
 };
+
 int main() {
-    doublyLinkedList l1;
+    linkedList l1;
+    linkedList l2;
     // l2;
-    l1.push(0);
-    l1.push(1);
     l1.push(2);
-    l1.push(3);
     l1.push(4);
-    // l1.push(5);
+    l1.push(3);
+    l2.push(5);
+    l2.push(6);
+    l2.push(4);
     // l1.push(6);
     // l1.push(7);
     
@@ -869,7 +874,7 @@ int main() {
     // l2.push(30);
     // ll.returnRoot()->next->next->next = ll.returnRoot();
     
-    l1.display();
+    // l1.display();
     cout<<endl;
 
     // l2.display(l2.returnHead());
