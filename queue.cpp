@@ -131,32 +131,38 @@ class queue_array_type2_extended{
         for(int i =0; i< 10;i++)cout<<arr[i]<<" -> ";
     }
 };
-
-// int main()
-// {
-//     queue_array_type2_extended q;
-//     q.enqueue(1);
-//     q.enqueue(2);
-//     q.enqueue(3);
-//     q.enqueue(4);
-//     q.enqueue(5);
-//     q.enqueue(6);
-//     q.enqueue(7);
-//     q.enqueue(8);
-//     q.enqueue(9);
-//     q.enqueue(10);
-//     q.enqueue(11);
-//     q.enqueue(12);
-//     q.enqueue(13);
-    
-//     q.display();
-//     q.array();
-
-//  q.dequeue();
-//  q.dequeue();
-
-//  q.display();
-//  q.array();
-//     return 0;
+// template <typename T> 
+// class queue_linkedList {
+//     struct node {
+//         T data;
+//         node * next;
+//     }
 // }
+int main()
+{
+    queue_array_type2_extended q;
+    q.enqueue(1);
+    q.enqueue(2);
+    q.enqueue(3);
+    q.enqueue(4);
+    q.enqueue(5);
+    q.enqueue(6);
+    q.enqueue(7);
+    q.enqueue(8);
+    q.enqueue(9);
+    q.enqueue(10);
+    q.enqueue(11);
+    q.enqueue(12);
+    q.enqueue(13);
+    
+    q.display();
+    q.array();
+
+ q.dequeue();
+ q.dequeue();
+
+ q.display();
+ q.array();
+    return 0;
+}
 
