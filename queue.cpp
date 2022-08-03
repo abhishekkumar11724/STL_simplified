@@ -1,17 +1,18 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+template <typename T>
 class queue_array_type1 {
     // queue where, if the rear pointer reaches the max size
     // the queue will be full, i.e., not a circular queue
-    int arr[10], front = -1, rear = -1, size = 5;
+    T arr[10], front = -1, rear = -1, size = 9;
 
     public:
     void createQueue(int size){
         // arr = new int [size];
         front = rear = -1;
     }
-    void enqueue(int data){
+    void enqueue(node * data){
         // if(arr == nullptr) createQueue(size);
         
         if(rear == size -1 || front >= size) {
@@ -42,17 +43,21 @@ class queue_array_type1 {
             i++;
         }
     }
+    bool isEmpty(){
+
+    }
 };
 
+template <typename T>
 class queue_array_type2 {
     // this queue of circular nature 
-    int * arr = nullptr, front, rear, size = 10;
+    T * arr = nullptr, front, rear, size = 10;
     public:
     void createQueue(int size){
-        arr = new int [size];
+        arr = new T [size];
         front = rear = 0;
     }
-    void enqueue(int data) {
+    void enqueue(T data) {
         if(arr == nullptr) {
             createQueue(size);
             // rear++;
@@ -97,6 +102,12 @@ class queue_array_type2 {
         cout<<endl;
         for(int i =0; i< 10;i++)cout<<arr[i]<<" -> ";
     }
+    bool isEmpty() {
+        if(front <= rear) {
+            return true;
+        }
+        return false;
+    }
 };
 
 class queue_array_type2_extended{
@@ -138,31 +149,31 @@ class queue_array_type2_extended{
 //         node * next;
 //     }
 // }
-int main()
-{
-    queue_array_type2_extended q;
-    q.enqueue(1);
-    q.enqueue(2);
-    q.enqueue(3);
-    q.enqueue(4);
-    q.enqueue(5);
-    q.enqueue(6);
-    q.enqueue(7);
-    q.enqueue(8);
-    q.enqueue(9);
-    q.enqueue(10);
-    q.enqueue(11);
-    q.enqueue(12);
-    q.enqueue(13);
+// int main()
+// {
+//     queue_array_type2_extended q;
+//     q.enqueue(1);
+//     q.enqueue(2);
+//     q.enqueue(3);
+//     q.enqueue(4);
+//     q.enqueue(5);
+//     q.enqueue(6);
+//     q.enqueue(7);
+//     q.enqueue(8);
+//     q.enqueue(9);
+//     q.enqueue(10);
+//     q.enqueue(11);
+//     q.enqueue(12);
+//     q.enqueue(13);
     
-    q.display();
-    q.array();
+//     q.display();
+//     q.array();
 
- q.dequeue();
- q.dequeue();
+//  q.dequeue();
+//  q.dequeue();
 
- q.display();
- q.array();
-    return 0;
-}
+//  q.display();
+//  q.array();
+//     return 0;
+// }
 
