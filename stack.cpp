@@ -272,19 +272,6 @@ template<typename T>int findMiddle(T &st)
 //     }
 // }
 
-// int main()
-// {
-//     stack<int> st;
-
-//     st.push(1);
-//     st.push(2);
-//     st.push(3);
-//     st.push(4);
-//     st.push(5);
-//     // You can initialise your stack here.
-//     printStack(st);
-// }
-
 void parenthesisMatch(string s){
     /*  41  (, 42  ), 91  [, 93  ], 123 {, 125 }  */
 
@@ -337,11 +324,12 @@ void infixToPostfix(string s) {
         
     }
 }
+
 int main()
 {
     // parenthesisMatch("(({}{}[[]]))");
     // infixToPostfix_parenthesized("((a+b)-c)");
-    infixToPostfix("a+b*c-d/e");
+    // infixToPostfix("a+b*c-d/e");
     // stack_linkedList st;
 
     // specialStack st;
@@ -356,5 +344,14 @@ int main()
 
     // st.display();    
     // cout<<st.getMin();
+    // stack<int> st;
+
+    // st.push(1);
+    // st.push(2);
+    // st.push(3);
+    // st.push(4);
+    // st.push(5);
+    // // You can initialise your stack here.
+    // printStack(st);
     return 0;
 }

@@ -142,7 +142,7 @@ class binaryTree_linkedList {
         root->lchild = root->rchild = NULL;
         q.enqueue(root);
         while(!q.isEmpty()) {
-            p = q.dequeue();
+            // p = q.dequeue();
             cin>>x;
             if(x != -1) {
                 t = new node;
