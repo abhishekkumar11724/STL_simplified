@@ -238,7 +238,34 @@ class binary_tree {
             return 0;
         }
     }
-
+    int count_with_degree2(node * root) {
+        int x, y;
+        if(root) {
+            x = count_with_degree2(root->lchild);
+            y = count_with_degree2(root->rchild);
+            if(root->rchild && root->lchild)
+                return x+y+1;
+            else    return x+y;
+        }
+        else return 0;
+    }
+    int add_all_nodes(node * root) {
+        int x, y;
+        if(root) {
+            x = add_all_nodes(root->lchild);
+            y = add_all_nodes(root->rchild);
+            return x +y + root->data;
+        }
+        else return 0;
+    }
+    int tree_height(node * root) {
+        int x, y ;
+        if(root) {
+            x = tree_height(root->lchild);
+            y = tree_height(root->rchild);
+            
+        }
+    }
 
 
 
@@ -328,7 +355,7 @@ int main()
     // cout<<endl;
     // bt.inorder_itr(root);
     // bt.levelOrder(root);
-    cout<<bt.count(root);
+    cout<<bt.add_all_nodes(root);
 
     return 0;
 }
